@@ -1,5 +1,5 @@
 
-2.5
+;; 2.2
 
 (defn x-point [point] (first point))
 (defn y-point [point] (second point))
@@ -29,3 +29,20 @@
 (defn cons-int [a b] (*(exp 2 a)(exp 3 b)))
 (defn car-int [c] (find-exp c 2))
 (defn cdr-int [c] (find-exp c 3))
+
+;; 2.6, use inc to test 
+
+(def zero (fn [f] (fn [x] x)))
+
+(defn add-1 [n] (fn [f] (fn [x] (f ((n f) x)))))
+
+(def one
+  (fn [f] (fn [x] (f x))))
+
+(def two
+  (fn [f] (fn [x] (f (f x)))))
+
+(defn add-num [m n]
+  (fn [f] (fn [x] ((m f) ((n f) x)))))
+
+(def three (add-num one two))
